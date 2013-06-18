@@ -1,0 +1,12 @@
+replace __ with __
+; with ++
+', ' with '; '
+,(\s\d+), with ;$2;
+++ with ,
+, '; with ';
+, ' with ; '
+',  with ';
+\((\d+) with $1
+\), with blank
+&lt; with <
+
