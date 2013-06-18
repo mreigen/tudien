@@ -1,0 +1,9 @@
+(2, 'ngoại ngữ'),
+(3, 'hình ảnh'),
+(4, 'đồng âm'),
+(5, 'thán từ'),
+(6, 'chửi rủa'),
+(7, 'tình dục - giới tính'),
+(8, 'trong nhà ngoài phố'),
+(9, 'văn phòng công sở'),
+(10, 'trường lớp - học đường');

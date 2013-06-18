@@ -17,9 +17,7 @@ def convert_to_seed_fu(class_name, keys)
         "\n"        => "",
         "\""        => "\\\""
       }
-      replacements.each do |orig, new|
-        line.gsub!(orig, new)
-      end
+      replacements.each { |orig, new| line.gsub!(orig, new) }
       line = line.split(/,(?=(?:[^\']*\'[^\']*\')*[^\']*$)/)
       next if line.count != keys.count || line.first.to_i == 0
 
@@ -41,6 +39,14 @@ def convert_to_seed_fu(class_name, keys)
 end
 
 namespace :convert do
+  task :all do
+    Rake::Task["convert:definitions"].invoke
+    Rake::Task["convert:images"].invoke
+    Rake::Task["convert:levels"].invoke
+    Rake::Task["convert:offences"].invoke
+    Rake::Task["convert:words"].invoke
+  end
+
   task :definitions do
     class_name = "definition"
     keys = [
@@ -69,6 +75,77 @@ namespace :convert do
       :source,
       :caption,
       :need_review
+    ]
+    convert_to_seed_fu(class_name, keys)
+  end
+
+  task :levels do
+    class_name = "level"
+    keys = [
+      :id,
+      :author_id,
+      :system_level,
+      :active_level,
+      :score
+    ]
+    convert_to_seed_fu(class_name, keys)
+  end
+
+  task :offences do
+    class_name = "offence"
+    keys = [
+      :id,
+      :offence
+    ]
+    convert_to_seed_fu(class_name, keys)
+  end
+
+  task :origins do
+    class_name = "origin"
+    keys = [
+      :id,
+      :origin
+    ]
+    convert_to_seed_fu(class_name, keys)
+  end
+
+  task :requests do
+    class_name = "request"
+    keys = [
+      :id,
+      :word,
+      :submit_date,
+      :type,
+      :answered,
+      :author_id,
+      :ip
+    ]
+    convert_to_seed_fu(class_name, keys)
+  end
+
+  task :tags do
+    class_name = "tag"
+    keys = [
+      :id,
+      :word_id,
+      :author_id,
+      :word,
+      :date,
+      :type,
+      :answered,
+      :ip
+    ]
+    convert_to_seed_fu(class_name, keys)
+  end
+
+  task :words do
+    class_name = "word"
+    keys = [
+      :id,
+      :word,
+      :author_id,
+      :submit_date,
+      :views
     ]
     convert_to_seed_fu(class_name, keys)
   end
